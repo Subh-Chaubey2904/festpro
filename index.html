@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FestPro — Where Competition Comes to Life</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE LOADER
+     ══════════════════════════════════════════════════════ -->
+<div id="page-loader">
+  <div class="loader-logo">FESTPRO</div>
+  <div class="loader-bar-track"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- Scroll Progress Bar -->
+<div id="scroll-progress"></div>
+
+<!-- Toast Container -->
+<div class="toast-container-custom" id="toast-container"></div>
+
+<!-- Confetti Canvas -->
+<canvas id="confetti-canvas"></canvas>
+
+
+<!-- ══════════════════════════════════════════════════════
+     NAVBAR
+     ══════════════════════════════════════════════════════ -->
+<nav class="navbar navbar-festpro navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand navbar-brand-text" href="#">FEST<span>PRO</span></a>
+
+    <div class="d-flex align-items-center gap-2 d-lg-none">
+      <button class="dark-toggle-btn" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
+      <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span>☰</span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li class="nav-item"><a class="nav-link nav-link-custom active" href="#" data-page="hero">Home</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#" data-page="about">About</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#" data-page="departments">Events</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#" data-page="leaderboard">Leaderboard</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#" data-page="admin">Admin</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-3">
+        <button class="dark-toggle-btn d-none d-lg-flex" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
+        <button class="btn-nav-cta btn-ripple" onclick="showPage('departments')">Register Now</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════════════
+     MAIN CONTENT
+     ══════════════════════════════════════════════════════ -->
+<div id="mainContent">
+
+  <!-- ═══════════════════════════════════════════
+       HERO SECTION
+       ═══════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-canvas">
+      <div class="hero-grid"></div>
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container hero-content">
+      <div class="row align-items-center min-vh-100 py-5">
+        <div class="col-lg-8">
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            Inter-College Fest 2025
+          </div>
+          <h1 class="hero-title">
+            Where <span class="highlight">Competition</span><br>Comes to Life
+          </h1>
+          <p class="hero-sub">Unite &nbsp;·&nbsp; Compete &nbsp;·&nbsp; Rise</p>
+          <div class="d-flex gap-3 flex-wrap">
+            <button class="btn-hero-primary btn-ripple" onclick="showPage('departments')">
+              🚀 Register Now
+            </button>
+            <button class="btn-hero-secondary btn-ripple" onclick="showPage('leaderboard')">
+              🏆 View Leaderboard
+            </button>
+          </div>
+
+          <div class="hero-stats">
+            <div class="hero-stat-item">
+              <div class="hero-stat-num" data-counter="42">0</div>
+              <div class="hero-stat-label">Colleges</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-num" data-counter="800">0</div>
+              <div class="hero-stat-label">Participants</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-num" data-counter="12">0</div>
+              <div class="hero-stat-label">Events</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-num" data-counter="4">0</div>
+              <div class="hero-stat-label">Departments</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT SECTION
+       ═══════════════════════════════════════════ -->
+  <section id="about" class="py-5">
+    <div class="container py-5">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 reveal">
+          <div class="section-tag"><div class="tag-line"></div> About the Fest</div>
+          <h2 class="section-title mb-4">A Celebration of <br>Talent &amp; Excellence</h2>
+          <p class="mb-4" style="color:var(--text-mid);line-height:1.8;font-size:1.05rem">
+            FestPro is an inter-college extravaganza bringing together the brightest minds and most talented individuals from institutions across the region. Compete, collaborate, and create memories that last a lifetime.
+          </p>
+          <p style="color:var(--text-light);line-height:1.8">
+            Each college participates under a unique <strong style="color:var(--green)">CC Code</strong>, accumulating <strong style="color:var(--green)">PR Points</strong> across all departments — Technical, Cultural, Sports, and Management — to claim the ultimate championship trophy.
+          </p>
+          <div class="d-flex gap-3 mt-4 flex-wrap">
+            <div class="about-accent-box" style="padding:16px 24px;border-radius:12px;text-align:center">
+              <div style="font-family:var(--font-display);font-weight:800;font-size:1.8rem">May 04</div>
+              <div style="font-size:0.8rem;opacity:0.8">Fest Date 2026</div>
+            </div>
+            <div class="about-accent-box" style="padding:16px 24px;border-radius:12px;text-align:center;background:linear-gradient(135deg,var(--yellow),#FFD740)!important;color:var(--dark)">
+              <div style="font-family:var(--font-display);font-weight:800;font-size:1.8rem">₹2L+</div>
+              <div style="font-size:0.8rem;opacity:0.7">Total Prize Pool</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal reveal-delay-2">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="stat-card">
+                <div class="stat-icon">💻</div>
+                <div class="stat-number" data-counter="3">0</div>
+                <div class="stat-desc">Technical Events</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="stat-card">
+                <div class="stat-icon">🎭</div>
+                <div class="stat-number" data-counter="3">0</div>
+                <div class="stat-desc">Cultural Events</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="stat-card">
+                <div class="stat-icon">⚽</div>
+                <div class="stat-number" data-counter="3">0</div>
+                <div class="stat-desc">Sports Events</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-number" data-counter="3">0</div>
+                <div class="stat-desc">Management Events</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       COUNTDOWN
+       ═══════════════════════════════════════════ -->
+  <section id="countdown">
+    <div class="orb orb-2" style="top:auto;bottom:-20%;right:-5%;"></div>
+    <div class="container text-center" style="position:relative;z-index:2">
+      <div class="reveal">
+        <div class="section-tag justify-content-center" style="color:var(--yellow)">
+          <div class="tag-line" style="background:var(--yellow)"></div>
+          Countdown to Fest
+          <div class="tag-line" style="background:var(--yellow)"></div>
+        </div>
+        <h2 class="section-title mb-2" style="color:#fff">The Clock is Ticking</h2>
+        <p style="color:rgba(255,255,255,0.4);font-size:0.9rem">May 04, 2026</p>
+      </div>
+      <div class="countdown-grid reveal reveal-delay-2">
+        <div class="countdown-block">
+          <div class="countdown-num" id="cntDays">00</div>
+          <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-block">
+          <div class="countdown-num" id="cntHours">00</div>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-block">
+          <div class="countdown-num" id="cntMins">00</div>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-block">
+          <div class="countdown-num" id="cntSecs">00</div>
+          <div class="countdown-label">Seconds</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       DEPARTMENTS / EVENTS
+       ═══════════════════════════════════════════ -->
+  <section id="departments" class="py-5">
+    <div class="container py-5">
+      <div class="text-center mb-5 reveal">
+        <div class="section-tag justify-content-center"><div class="tag-line"></div> Events<div class="tag-line"></div></div>
+        <h2 class="section-title">Compete Across Departments</h2>
+        <p class="mt-3" style="color:var(--text-light);max-width:520px;margin:12px auto 0">Each event earns your college PR Points. More events, more glory.</p>
+      </div>
+
+      <!-- Dept Tab Buttons -->
+      <div class="d-flex gap-3 justify-content-center flex-wrap mb-5 reveal reveal-delay-1">
+        <button class="dept-tab-btn active" data-dept="technical"><span class="tab-icon">💻</span> Technical</button>
+        <button class="dept-tab-btn" data-dept="cultural"><span class="tab-icon">🎭</span> Cultural</button>
+        <button class="dept-tab-btn" data-dept="sports"><span class="tab-icon">⚽</span> Sports</button>
+        <button class="dept-tab-btn" data-dept="management"><span class="tab-icon">📊</span> Management</button>
+      </div>
+
+      <!-- Events Grid -->
+      <div class="row g-4" id="events-container"></div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       LEADERBOARD
+       ═══════════════════════════════════════════ -->
+  <section id="leaderboard" class="py-5" style="background:var(--ivory-dark)">
+    <div class="container py-5">
+      <div class="text-center mb-5 reveal">
+        <div class="section-tag justify-content-center"><div class="tag-line"></div> Leaderboard<div class="tag-line"></div></div>
+        <h2 class="section-title">PR Points Standings</h2>
+        <p class="mt-3" style="color:var(--text-light);max-width:520px;margin:12px auto 0">Live rankings updated as PR points are awarded. Who will claim the top spot?</p>
+      </div>
+
+      <!-- Filters & Search -->
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4 reveal reveal-delay-1">
+        <div class="d-flex gap-2 flex-wrap">
+          <button class="filter-chip active" data-filter="all">All</button>
+          <button class="filter-chip" data-filter="technical">Technical</button>
+          <button class="filter-chip" data-filter="cultural">Cultural</button>
+          <button class="filter-chip" data-filter="sports">Sports</button>
+          <button class="filter-chip" data-filter="management">Management</button>
+        </div>
+        <div class="d-flex gap-2 align-items-center">
+          <input type="text" id="lb-search" class="leaderboard-search" placeholder="🔍 Search CC Code or CL Name…" />
+          <button class="btn-export" onclick="exportCSV()">⬇️ Export CSV</button>
+        </div>
+      </div>
+
+      <!-- Top 3 Podium -->
+      <div class="lb-top3 reveal reveal-delay-2" id="lb-podium"></div>
+
+      <!-- Full Table -->
+      <div class="lb-table-wrap reveal reveal-delay-3">
+        <table class="lb-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>CC Code</th>
+              <th>CL Name</th>
+              <th>Department</th>
+              <th>Total PR</th>
+            </tr>
+          </thead>
+          <tbody id="lb-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       STATS SECTION
+       ═══════════════════════════════════════════ -->
+  <section id="stats" class="py-5">
+    <div class="container py-5">
+      <div class="text-center mb-5 reveal">
+        <div class="section-tag justify-content-center"><div class="tag-line"></div> FestPro in Numbers<div class="tag-line"></div></div>
+        <h2 class="section-title">The Fest by the Numbers</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-6 col-md-3 reveal">
+          <div class="stat-card">
+            <div class="stat-icon">🏛️</div>
+            <div class="stat-number" data-counter="42">0</div>
+            <div class="stat-desc">Colleges Registered</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 reveal reveal-delay-1">
+          <div class="stat-card">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-number" data-counter="12">0</div>
+            <div class="stat-desc">Total Events</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 reveal reveal-delay-2">
+          <div class="stat-card">
+            <div class="stat-icon">🏅</div>
+            <div class="stat-number" data-counter="800">0</div>
+            <div class="stat-desc">Participants</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 reveal reveal-delay-3">
+          <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-number" data-counter="200000">0</div>
+            <div class="stat-desc">Prize Pool (₹)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-wave"></div>
+    <div class="container footer-content">
+      <div class="row g-5">
+        <div class="col-md-4">
+          <div class="footer-brand">FESTPRO</div>
+          <div class="footer-tagline">Where Competition Comes to Life</div>
+          <p class="mt-3" style="color:rgba(255,255,255,0.35);font-size:0.85rem;line-height:1.7">
+            An inter-college fest celebrating talent, innovation, and the spirit of competition. Unite. Compete. Rise.
+          </p>
+        </div>
+        <div class="col-md-2 col-6">
+          <div class="footer-heading">Events</div>
+          <a class="footer-link" href="#" onclick="switchDept('technical')">Technical</a>
+          <a class="footer-link" href="#" onclick="switchDept('cultural')">Cultural</a>
+          <a class="footer-link" href="#" onclick="switchDept('sports')">Sports</a>
+          <a class="footer-link" href="#" onclick="switchDept('management')">Management</a>
+        </div>
+        <div class="col-md-2 col-6">
+          <div class="footer-heading">Links</div>
+          <a class="footer-link" href="#" data-page="hero">Home</a>
+          <a class="footer-link" href="#" data-page="about">About</a>
+          <a class="footer-link" href="#" data-page="leaderboard">Leaderboard</a>
+          <a class="footer-link" href="#" data-page="admin">Admin</a>
+        </div>
+        <div class="col-md-4">
+          <div class="footer-heading">PR Points System</div>
+          <p style="color:rgba(255,255,255,0.35);font-size:0.85rem;line-height:1.7">
+            Earn PR Points by participating and winning events. Points are automatically calculated and assigned to your CC Code. Track your college's rise on the live leaderboard.
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2026 FestPro Inter-College Fest. All rights reserved.
+        &nbsp;·&nbsp; Built with ❤️ for champions.
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /mainContent -->
+
+
+<!-- ══════════════════════════════════════════════════════
+     ADMIN PANEL
+     ══════════════════════════════════════════════════════ -->
+<div id="adminPage" style="display:none;flex-direction:row;min-height:100vh">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="admin-logo">⚡ FESTPRO<span style="font-size:0.7rem;font-weight:400;color:rgba(255,255,255,0.4);display:block;margin-top:-2px">Admin Console</span></div>
+    <button class="admin-nav-item active" data-section="dashboard">📊 Dashboard</button>
+    <button class="admin-nav-item" data-section="registrations">📝 Registrations</button>
+    <button class="admin-nav-item" data-section="winners">🏆 Declare Winners</button>
+    <button class="admin-nav-item" data-section="leaderboard">📈 Leaderboard</button>
+    <button class="admin-nav-item" data-section="charts">📉 Analytics</button>
+    <button class="admin-nav-item" data-section="events">🗂️ Manage Events</button>
+    <div style="border-top:1px solid rgba(255,255,255,0.08);margin:16px 0;padding-top:16px">
+      <button class="admin-nav-item" onclick="adminLogout()">🚪 Logout</button>
+      <button class="admin-nav-item" onclick="adminLogout();showPage('hero')">🏠 Back to Site</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="admin-main flex-grow-1">
+
+    <!-- Dashboard -->
+    <div id="admin-dashboard" class="admin-panel-section active">
+      <h1 style="font-family:var(--font-display);font-weight:800;font-size:1.8rem;margin-bottom:8px">Dashboard</h1>
+      <p style="color:var(--text-light);margin-bottom:32px">Overview of FestPro 2025 activity</p>
+
+      <div class="row g-3 mb-5">
+        <div class="col-6 col-md-3">
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon" style="background:rgba(0,155,77,0.1)">🏛️</div>
+            <div><div class="admin-stat-num" id="admin-total-colleges">0</div><div class="admin-stat-label">Colleges</div></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon" style="background:rgba(255,204,0,0.1)">👥</div>
+            <div><div class="admin-stat-num" id="admin-total-participants">0</div><div class="admin-stat-label">Registrations</div></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon" style="background:rgba(0,155,77,0.1)">🎯</div>
+            <div><div class="admin-stat-num" id="admin-total-events">12</div><div class="admin-stat-label">Total Events</div></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon" style="background:rgba(0,194,97,0.1)">✅</div>
+            <div><div class="admin-stat-num" id="admin-approved">0</div><div class="admin-stat-label">Approved</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick actions -->
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="admin-table-wrap p-4">
+            <h5 style="font-family:var(--font-display);font-weight:700;margin-bottom:16px">⚡ Quick Actions</h5>
+            <div class="d-flex gap-2 flex-wrap">
+              <button class="btn-green" onclick="switchAdminSection('registrations')">View Registrations</button>
+              <button class="btn-yellow" onclick="switchAdminSection('winners')">Declare Winners</button>
+              <button class="btn-export" onclick="exportCSV()">⬇️ Export CSV</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="admin-table-wrap p-4">
+            <h5 style="font-family:var(--font-display);font-weight:700;margin-bottom:12px">📋 Recent Registrations</h5>
+            <div id="admin-recent-regs" style="font-size:0.85rem;color:var(--text-light)">No registrations yet.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Registrations -->
+    <div id="admin-registrations" class="admin-panel-section">
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+          <h1 style="font-family:var(--font-display);font-weight:800;font-size:1.8rem;margin-bottom:4px">Registrations</h1>
+          <p style="color:var(--text-light)">Approve or reject participant registrations</p>
+        </div>
+      </div>
+      <div class="admin-table-wrap" style="overflow-x:auto">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Reg ID</th><th>Name</th><th>CC Code</th><th>CL Name</th>
+              <th>Event</th><th>Dept</th><th>Contact</th><th>Status</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="admin-reg-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Declare Winners -->
+    <div id="admin-winners" class="admin-panel-section">
+      <h1 style="font-family:var(--font-display);font-weight:800;font-size:1.8rem;margin-bottom:8px">Declare Winners</h1>
+      <p style="color:var(--text-light);margin-bottom:32px">Assign PR points to winning colleges. Points update leaderboard automatically.</p>
+
+      <div class="row g-4">
+        <div class="col-lg-5">
+          <div class="admin-table-wrap p-4">
+            <h5 style="font-family:var(--font-display);font-weight:700;margin-bottom:20px">🏆 Award PR Points</h5>
+            <div class="mb-3">
+              <label class="form-label-custom">CC Code*</label>
+              <input type="text" id="win-cc-code" class="form-control-custom form-control" placeholder="e.g. CC-101" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label-custom">Event*</label>
+              <select id="win-event-select" class="form-control-custom form-control form-select">
+                <option value="">Select Event…</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label class="form-label-custom">Position*</label>
+              <select id="win-position" class="form-control-custom form-control form-select">
+                <option value="1">🥇 1st Position</option>
+                <option value="2">🥈 2nd Position</option>
+                <option value="3">🥉 3rd Position</option>
+                <option value="0">🎟️ Participation Only</option>
+              </select>
+            </div>
+            <button class="btn-yellow w-100" style="padding:14px;font-size:1rem;border-radius:12px" onclick="declareWinner()">
+              🏆 Declare &amp; Award PR Points
+            </button>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="admin-table-wrap p-4">
+            <h5 style="font-family:var(--font-display);font-weight:700;margin-bottom:16px">📋 PR Points Guide</h5>
+            <div style="overflow-x:auto">
+              <table class="admin-table">
+                <thead><tr><th>Event</th><th>Dept</th><th>Participation</th><th>1st</th><th>2nd</th><th>3rd</th></tr></thead>
+                <tbody id="pr-guide-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leaderboard Admin -->
+    <div id="admin-leaderboard" class="admin-panel-section">
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+          <h1 style="font-family:var(--font-display);font-weight:800;font-size:1.8rem;margin-bottom:4px">PR Leaderboard</h1>
+          <p style="color:var(--text-light)">All colleges ranked by total PR points</p>
+        </div>
+        <button class="btn-export" onclick="exportCSV()">⬇️ Export CSV</button>
+      </div>
+      <div class="admin-table-wrap" style="overflow-x:auto">
+        <table class="admin-table">
+          <thead><tr><th>Rank</th><th>CC Code</th><th>CL Name</th><th>Department</th><th>Total PR</th></tr></thead>
+          <tbody id="admin-lb-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Analytics Charts -->
+    <div id="admin-charts" class="admin-panel-section">
+      <h1 style="font-family:var(--font-display);font-weight:800;font-size:1.8rem;margin-bottom:8px">Analytics</h1>
+      <p style="color:var(--text-light);margin-bottom:32px">Participation and PR distribution insights</p>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="admin-table-wrap p-4">
+            <h5 style="font-family:var(--font-display);font-weight:700;margin-bottom:20px">📊 Registrations by Department</h5>
+            <div id="dept-chart"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="admin-table-wrap p-4">
+            <h5 style="font-family:var(--font-display);font-weight:700;margin-bottom:20px">🏅 Top PR Earners</h5>
+            <div id="pr-chart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Manage Events -->
+    <div id="admin-events" class="admin-panel-section">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+        <div>
+          <h1 style="font-family:var(--font-display);font-weight:800;font-size:1.8rem;margin-bottom:4px">Manage Events</h1>
+          <p style="color:var(--text-light)">Add new events or remove existing ones. Changes reflect instantly on the public site.</p>
+        </div>
+        <button class="btn-yellow" onclick="openAddEventModal()" style="padding:10px 24px;font-size:0.9rem;border-radius:50px">
+          ➕ Add New Event
+        </button>
+      </div>
+
+      <!-- Filter by dept -->
+      <div class="d-flex gap-2 flex-wrap mb-4" id="events-filter-tabs">
+        <button class="filter-chip active" data-dept="all" onclick="filterAdminEvents('all',this)">All</button>
+        <button class="filter-chip" data-dept="technical"  onclick="filterAdminEvents('technical',this)">💻 Technical</button>
+        <button class="filter-chip" data-dept="cultural"   onclick="filterAdminEvents('cultural',this)">🎭 Cultural</button>
+        <button class="filter-chip" data-dept="sports"     onclick="filterAdminEvents('sports',this)">⚽ Sports</button>
+        <button class="filter-chip" data-dept="management" onclick="filterAdminEvents('management',this)">📊 Management</button>
+      </div>
+
+      <!-- Events Table -->
+      <div class="admin-table-wrap" style="overflow-x:auto">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Icon</th>
+              <th>Event Name</th>
+              <th>Department</th>
+              <th>Participation PR</th>
+              <th>1st PR</th>
+              <th>2nd PR</th>
+              <th>3rd PR</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="admin-events-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     REGISTRATION MODAL
+     ══════════════════════════════════════════════════════ -->
+<div class="modal fade" id="regModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title-custom">Register for Event</div>
+          <div style="font-size:0.85rem;color:rgba(255,255,255,0.6)" id="regEventDisplay">—</div>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form id="regForm">
+          <input type="hidden" id="regEventId" />
+          <input type="hidden" id="regEventDept" />
+          <input type="hidden" id="regEventName" />
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label-custom">Participant Name *</label>
+              <input type="text" id="regName" class="form-control form-control-custom" placeholder="Full name" required />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom">CC Code *</label>
+              <input type="text" id="regCCCode" class="form-control form-control-custom" placeholder="e.g. CC-101" required />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom">CL Name *</label>
+              <input type="text" id="regCLName" class="form-control form-control-custom" placeholder="College coordinator name" required />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom">Contact Number *</label>
+              <input type="tel" id="regContact" class="form-control form-control-custom" placeholder="10-digit mobile number" required />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom">Email</label>
+              <input type="email" id="regEmail" class="form-control form-control-custom" placeholder="your@email.com" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom">Team Members (if any)</label>
+              <input type="text" id="regTeam" class="form-control form-control-custom" placeholder="Comma-separated names" />
+            </div>
+          </div>
+          <div class="mt-3 p-3 rounded-3" style="background:rgba(0,155,77,0.06);border:1px solid rgba(0,155,77,0.12)">
+            <small style="color:var(--green);font-weight:600">ℹ️ Participation PR points are automatically awarded upon admin approval.</small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer border-0 p-4 pt-0">
+        <button class="btn-outline-green" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn-hero-primary btn-ripple" onclick="submitRegistration()" style="font-size:0.9rem;padding:12px 28px">Submit Registration →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     ADMIN LOGIN MODAL
+     ══════════════════════════════════════════════════════ -->
+<div class="modal fade" id="adminLoginModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width:420px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title-custom">🔐 Admin Login</div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <p style="color:var(--text-light);font-size:0.875rem;margin-bottom:20px">Default: <code>admin</code> / <code>fest2024</code></p>
+        <div class="mb-3">
+          <label class="form-label-custom">Username</label>
+          <input type="text" id="adminUsername" class="form-control form-control-custom" placeholder="Username" value="admin" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label-custom">Password</label>
+          <input type="password" id="adminPassword" class="form-control form-control-custom" placeholder="Password" value="fest2024" onkeydown="if(event.key==='Enter')adminLogin()" />
+        </div>
+      </div>
+      <div class="modal-footer border-0 p-4 pt-0">
+        <button class="btn-hero-primary btn-ripple w-100" onclick="adminLogin()" style="font-size:0.95rem;padding:14px;justify-content:center">Login to Admin Panel →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ══════════════════════════════════════════════════════
+     ADD EVENT MODAL
+     ══════════════════════════════════════════════════════ -->
+<div class="modal fade" id="addEventModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title-custom" id="addEventModalTitle">➕ Add New Event</div>
+          <div style="font-size:0.85rem;color:rgba(255,255,255,0.55)">Fill in the event details below</div>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <input type="hidden" id="editEventId" value="" />
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label-custom">Event Name *</label>
+            <input type="text" id="evName" class="form-control form-control-custom" placeholder="e.g. Code Battle" />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label-custom">Icon (Emoji) *</label>
+            <input type="text" id="evIcon" class="form-control form-control-custom" placeholder="e.g. 💡" maxlength="4" />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label-custom">Department *</label>
+            <select id="evDept" class="form-control form-control-custom form-select">
+              <option value="technical">💻 Technical</option>
+              <option value="cultural">🎭 Cultural</option>
+              <option value="sports">⚽ Sports</option>
+              <option value="management">📊 Management</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label-custom">Description *</label>
+            <textarea id="evDesc" class="form-control form-control-custom" rows="2" placeholder="Brief description of the event…"></textarea>
+          </div>
+          <div class="col-12">
+            <label class="form-label-custom">Rules (one per line) *</label>
+            <textarea id="evRules" class="form-control form-control-custom" rows="3" placeholder="Rule 1&#10;Rule 2&#10;Rule 3"></textarea>
+          </div>
+          <div class="col-6 col-md-3">
+            <label class="form-label-custom">Participation PR *</label>
+            <input type="number" id="evPRpart" class="form-control form-control-custom" value="10" min="0" />
+          </div>
+          <div class="col-6 col-md-3">
+            <label class="form-label-custom">1st Place PR *</label>
+            <input type="number" id="evPR1st" class="form-control form-control-custom" value="50" min="0" />
+          </div>
+          <div class="col-6 col-md-3">
+            <label class="form-label-custom">2nd Place PR *</label>
+            <input type="number" id="evPR2nd" class="form-control form-control-custom" value="30" min="0" />
+          </div>
+          <div class="col-6 col-md-3">
+            <label class="form-label-custom">3rd Place PR *</label>
+            <input type="number" id="evPR3rd" class="form-control form-control-custom" value="20" min="0" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer border-0 p-4 pt-0">
+        <button class="btn-outline-green" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn-hero-primary btn-ripple" onclick="saveEvent()" style="font-size:0.9rem;padding:12px 28px">
+          💾 Save Event →
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div class="modal fade" id="deleteEventModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width:420px">
+    <div class="modal-content">
+      <div class="modal-header" style="background:linear-gradient(135deg,#991b1b,#7f1d1d)">
+        <div class="modal-title-custom">🗑️ Delete Event</div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4 text-center">
+        <div style="font-size:3rem;margin-bottom:16px">⚠️</div>
+        <p style="font-size:1rem;font-weight:600;margin-bottom:8px">Delete <span id="deleteEventName" style="color:var(--green)"></span>?</p>
+        <p style="color:var(--text-light);font-size:0.875rem">This event will be permanently removed from the system. Existing registrations linked to this event will remain.</p>
+      </div>
+      <div class="modal-footer border-0 p-4 pt-0 justify-content-center gap-3">
+        <button class="btn-outline-green" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn-danger-sm" id="confirmDeleteBtn" style="padding:10px 28px;font-size:0.9rem;border-radius:50px">
+          🗑️ Yes, Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- App JS -->
+<script src="js/app.js"></script>
+
+<!-- Fix admin PR Guide table (inline data injection) -->
+<script>
+  // Populate PR Guide table in admin panel
+  document.addEventListener('DOMContentLoaded', () => {
+    const tbody = document.getElementById('pr-guide-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    Object.entries({ technical: '💻', cultural: '🎭', sports: '⚽', management: '📊' }).forEach(([dept, icon]) => {
+      EVENTS[dept].forEach(ev => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${icon} ${ev.name}</td><td style="text-transform:capitalize">${dept}</td>
+          <td>${ev.points.participation}</td><td>${ev.points.first}</td>
+          <td>${ev.points.second}</td><td>${ev.points.third}</td>`;
+        tbody.appendChild(tr);
+      });
+    });
+
+    // Admin recent regs
+    function refreshRecent() {
+      const el = document.getElementById('admin-recent-regs');
+      const regs = App.data.registrations.slice(-3).reverse();
+      if (!regs.length) { el.textContent = 'No registrations yet.'; return; }
+      el.innerHTML = regs.map(r => `<div style="padding:8px 0;border-bottom:1px solid rgba(0,155,77,0.08)">
+        <strong>${r.name}</strong> — ${r.eventName} 
+        <span class="status-badge ${r.status}" style="float:right">${r.status}</span>
+      </div>`).join('');
+    }
+    // Poll for updates
+    setInterval(refreshRecent, 2000);
+    refreshRecent();
+  });
+</script>
+
+</body>
+</html>
